@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default function Form({ onSubmit, children }) {
+export default function Form({ dataTestId, onSubmit, children }) {
     return (
         <div>
-            <form onSubmit={onSubmit}>
+            <form
+                data-testid={dataTestId} 
+                onSubmit={onSubmit}
+            >
                 {children}
             </form>
         </div>

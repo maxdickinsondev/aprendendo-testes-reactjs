@@ -18,7 +18,10 @@ function Home() {
 
   return (
     <div className="App">
-      <Form onSubmit={handleSubmit}>
+      <Form
+        dataTestId="form-field" 
+        onSubmit={handleSubmit}
+      >
         <Input 
           placeholder="Login"
           value={username}
@@ -39,7 +42,7 @@ function Home() {
       </Form>
 
       {isClick ? (
-        <h1> {username} </h1>
+        <h1 id="username" >{username}</h1>
       ) : null}
     </div>
   );
