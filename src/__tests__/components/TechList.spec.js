@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, act, fireEvent, waitForElement, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, act, fireEvent, waitForElement } from '@testing-library/react';
 
 import TechList from '../../components/TechList';
 
@@ -15,7 +16,7 @@ describe('TechList component', () => {
     });
 
     it('should be able to add new tech', async () => {
-        const { getByPlaceholderText, getByText } = render(<TechList />);
+        const { getByPlaceholderText, getByText, getByTestId } = render(<TechList />);
 
         const input = await waitForElement(
             () => getByPlaceholderText('Insira uma tecnologia')
@@ -35,11 +36,7 @@ describe('TechList component', () => {
             fireEvent.click(button);
         });
 
-        const result = await waitForElement(
-            () => getByText('ReactJS')
-        );
-
-        expect(result).toBeDefined();
+        expect(getByTestId('tech-list')).toContainElement(getByText('ReactJS'));
     });
 
     it('should add techs on storage', async () => {
@@ -64,5 +61,11 @@ describe('TechList component', () => {
         });
 
         expect(window.localStorage.setItem).toHaveBeenCalledWith('techs', JSON.stringify(['ReactJS']));
+    });
+
+    it('should get techs on storage', () => {
+        render(<TechList />);
+
+        expect(window.localStorage.getItem).toHaveBeenCalledWith('techs');
     });
 });
