@@ -1,10 +1,11 @@
 import React from 'react';
 
-import Home from './pages/Home';
+// import Home from './pages/Home';
+import TechList from './components/TechList';
 
 function App() {
   return (
-    <Home />
+    <TechList />
   );
 }
 
