@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Form from '../Form';
 import Input from '../Input';
@@ -15,9 +15,22 @@ export default function TechList() {
         setNewTech('');
     }
 
+    useEffect(() => {
+        const techs = localStorage.getItem('techs');
+
+        if (techs) {
+            setTechs(JSON.parse(techs));
+        }
+    }, []);
+
+    useEffect(() => {
+       localStorage.setItem('techs', JSON.stringify(techs));
+    }, [techs]);
+
     return (
         <div>
             <Form  
+                dataTestId="tech-form"
                 onSubmit={handleSubmit}
             >
                 <Input 
